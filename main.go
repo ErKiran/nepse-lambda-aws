@@ -12,18 +12,26 @@ type MyStock struct {
 	Ticker string `json:"ticker"`
 }
 
-func HandleRequest(ctx context.Context, name MyStock) (string, error) {
+type MyStockResponse struct {
+	Message string                     `json:"message"`
+	Data    *nepse.LastTradingDayStats `json:"data"`
+}
+
+func HandleRequest(ctx context.Context, name MyStock) (*MyStockResponse, error) {
 	nep, err := nepse.NewNepse()
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	currentPrice, err := nep.GetCurrentPrice(name.Ticker)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	return fmt.Sprintf("The price of %s is %.2f it has changed %.2f percentage and traded with volume %d", currentPrice.Ticker, currentPrice.Lasttradedprice, currentPrice.Percentagechange, currentPrice.Totaltradequantity), nil
+	return &MyStockResponse{
+		Message: fmt.Sprintf("The price of %s is %.2f it has changed %.2f percentage and traded with %d number of stocks", currentPrice.Ticker, currentPrice.Lasttradedprice, currentPrice.Percentagechange, currentPrice.Totaltradequantity),
+		Data:    currentPrice,
+	}, nil
 }
 
 func main() {

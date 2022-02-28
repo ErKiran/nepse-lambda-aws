@@ -1,4 +1,6 @@
-### More than Hello World Example of Lambda function   
+### Are you tired of Hello World Example Lambda Example whenever you search to learn AWS Lambda? Then, You are in the right place.    
+  
+
 
 ##### This repo is just for learning purpose and I plan to create other repos too to enhance my knowledge on AWS and I will be using part of code from my Nepse Application. 
 
@@ -14,9 +16,7 @@ To Deploy the Lambda Function, you need to follow the below steps:
 `aws lambda get-function --function-name nepse-lambda-aws`
 
 To update the Lambda function code  
-
 `aws lambda update-function-code --function-name nepse-lambda-aws --zip-file fileb://main.zip --publish`
 
-To update the Lamda function configuration 
-
-`aws lambda update-function-configuration --function-name nepse-lambda-aws --environment "Variables={NEPSE=https://*******.com/}"`
+To update the Lamda function configuration
+`aws lambda update-function-configuration --function-name nepse-lambda-aws --environment "Variables={NEPSE=https://***/}"`
